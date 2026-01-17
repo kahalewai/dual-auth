@@ -3,7 +3,7 @@ dual-auth Adapters
 
 IAM vendor adapters for dual-subject token requests.
 
-Author: dual-auth Project
+Author: kahalewai (https://www.github.com/kahalewai)
 License: Apache 2.0
 Version: 1.0.1
 """
