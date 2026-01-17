@@ -189,7 +189,7 @@ config = get_config(secrets_backend='aws')
 config = get_config(secrets_backend='vault')
 ```
 
-See the [Implementation Guide](./dual_auth_implementation_guide.md#step-3-configure-secrets-management-production) for detailed setup.
+See the [Python Implementation Guide](https://github.com/kahalewai/dual-auth/python#step-3-configure-secrets-management-production) for detailed setup.
 
 <br>
 
@@ -197,10 +197,10 @@ See the [Implementation Guide](./dual_auth_implementation_guide.md#step-3-config
 
 IAM Configuration Guides explain how to configure a specific IAM vendor to support dual-auth:
 
-* **Keycloak**: [iam_guide_keycloak.md](./iam_guide_keycloak.md)
-* **Auth0**: [iam_guide_auth0.md](./iam_guide_auth0.md)
-* **Okta**: [iam_guide_okta.md](./iam_guide_okta.md)
-* **EntraID**: [iam_guide_entraid.md](./iam_guide_entraid.md)
+* **Keycloak**: [Keycloak IAM Configuration Guide](https://github.com/kahalewai/dual-auth/blob/main/docs/iam_guide_keycloak.md)
+* **Auth0**: [Auth0 IAM Configuration Guide](https://github.com/kahalewai/dual-auth/blob/main/docs/iam_guide_auth0.md)
+* **Okta**: [Okta IAM Configuration Guide](https://github.com/kahalewai/dual-auth/blob/main/docs/iam_guide_okta.md)
+* **EntraID**: [EntraID IAM Configuration Guide](https://github.com/kahalewai/dual-auth/blob/main/docs/iam_guide_entraid.md)
 
 IAM Guides and their resulting implementations are independent and do not depend on each other. If your organization uses multiple IAM platforms, dual-auth can be implemented in parallel while preserving consistent security semantics.
 
@@ -210,7 +210,7 @@ IAM Guides and their resulting implementations are independent and do not depend
 
 The Implementation Guide provides step-by-step instructions for integrating dual-auth into your applications and agents:
 
-* **Python**: [dual_auth_implementation_guide.md](./dual_auth_implementation_guide.md)
+* **Python**: [Python Implementation Guide](https://github.com/kahalewai/dual-auth/python)
 * **TypeScript**: (Coming Soon)
 * **Java**: (Coming Soon)
 
