@@ -1,0 +1,93 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dual-auth"
+version = "1.0.1"
+description = "Dual-Subject Access Control for AI Agents - A security solution implementing AGBAC for AI Agents and Humans"
+readme = "README.md"
+license = "Apache-2.0"
+authors = [
+    {name = "dual-auth Project"}
+]
+keywords = [
+    "security",
+    "authentication",
+    "authorization",
+    "ai-agents",
+    "oauth",
+    "oidc",
+    "keycloak",
+    "auth0",
+    "okta",
+    "entraid",
+    "azure-ad",
+    "dual-subject",
+    "agbac"
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Security",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "requests>=2.25.0",
+    "PyJWT>=2.0.0",
+    "cryptography>=3.4.0",
+    "urllib3>=1.26.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "isort>=5.0.0",
+    "mypy>=1.0.0",
+    "flake8>=6.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/kahalewai/dual-auth"
+Documentation = "https://github.com/kahalewai/dual-auth#readme"
+Repository = "https://github.com/kahalewai/dual-auth"
+Issues = "https://github.com/kahalewai/dual-auth/issues"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["dual_auth*"]
+
+[tool.setuptools.package-data]
+dual_auth = ["py.typed"]
+
+[tool.black]
+line-length = 100
+target-version = ['py38', 'py39', 'py310', 'py311', 'py312']
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --cov=dual_auth --cov-report=term-missing"
