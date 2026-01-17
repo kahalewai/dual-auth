@@ -3,7 +3,7 @@ dual-auth API Call Utilities
 
 API call handlers for in-session and out-of-session scenarios.
 
-Author: dual-auth Project
+Author: kahalewai (https://www.github.com/kahalewai)
 License: Apache 2.0
 Version: 1.0.1
 """
