@@ -290,8 +290,8 @@ dual-auth does not:
 
 | Version | Changes |
 |---------|---------|
-| 1.0.2 | Added cloud secrets management (AWS, GCP, Azure, Vault) |
-| 1.0.1 | Initial release with Keycloak, Auth0, Okta, EntraID support |
+| 1.0.1 | Added cloud secrets management (AWS, GCP, Azure, Vault) |
+| 1.0.0 | Initial release with Keycloak, Auth0, Okta, EntraID support |
 
 <br>
 <br>
