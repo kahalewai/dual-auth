@@ -13,7 +13,7 @@ Security Features:
 
 Compatible with: Auth0 (all plans with Actions support)
 
-Author: dual-auth Project
+Author: kahalewai (https://www.github.com/kahalewai)
 License: Apache 2.0
 Version: 1.0.1
 """
