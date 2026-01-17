@@ -14,7 +14,7 @@ Version 1.0.1
 
 ## Intro
 
-Dual-Auth is the v1 reference implementation of AGent Based Access Control for system/application layer implementation of dual-subject authorization for AI agents and humans. The goal of dual-auth v1 is to demonstrate that dual-subject security capabilities can be implemented today using existing enterprise IAM platforms without external policy engines or new IAM infrastructure. Each IAM Configuration Guide shows how dual-subject authorization can be implemented using native configuration features of a specific identity provider. Applications and Agents are updated to become dual-subject aware (human AND agent identities).
+Dual-Auth is the v1 reference implementation of AGent Based Access Control for system/application layer implementation of dual-subject authorization for AI agents and humans. The goal of dual-auth v1 is to demonstrate that dual-subject security capabilities can be implemented today using existing enterprise IAM platforms without external policy engines or new IAM infrastructure. While v1 is a sub-set of the full AGBAC specification, it is production ready to implement dual-subject control. Each IAM Configuration Guide shows how dual-subject authorization can be implemented using native configuration features of a specific identity provider. Applications and Agents are updated to become dual-subject aware (human AND agent identities).
 
 Dual-Auth is intended to:
 * Make dual-subject authorization tangible and adoptable
