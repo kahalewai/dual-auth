@@ -137,7 +137,7 @@ response = client.call_api(
 )
 ```
 
-For complete setup instructions, see the [Python Implementation Guide](https://github.com/kahalewai/dual-auth/python).
+For complete setup instructions, see the [Python Implementation Guide](https://github.com/kahalewai/dual-auth/python/README.md).
 
 <br>
 
