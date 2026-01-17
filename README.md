@@ -84,11 +84,8 @@ Access is permitted only when both subjects are authorized.
 ### Installation
 
 ```bash
-# Copy dual-auth package to your project
-cp -r dual_auth/ your-project/
-
-# Install dependencies
-pip install pyjwt[crypto] requests cryptography
+# Install Dual-Auth
+pip install dual-auth
 
 # Optional: Install cloud secrets management
 pip install boto3                          # AWS
