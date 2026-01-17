@@ -11,7 +11,7 @@ Security Features:
 - IAM identifier logging (pseudonymous, not PII)
 - Proper error handling without exposing sensitive data
 
-Author: dual-auth Project
+Author: kahalewai (https://www.github.com/kahalewai)
 License: Apache 2.0
 Version: 1.0.1
 """
