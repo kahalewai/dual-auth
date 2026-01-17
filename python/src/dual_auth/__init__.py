@@ -18,13 +18,13 @@ Supported Secrets Backends:
 - Azure Key Vault
 - HashiCorp Vault
 
-Author: dual-auth Project
+Author: kahalewai (https://www.github.com/kahalewai)
 License: Apache 2.0
 Version: 1.0.1
 """
 
 __version__ = "1.0.1"
-__author__ = "dual-auth Project"
+__author__ = "kahalewai"
 __license__ = "Apache 2.0"
 
 from .config import (
