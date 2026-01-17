@@ -19,7 +19,7 @@ Logging:
 - No hashing - enables direct correlation with IAM provider logs
 - PII (email, name) never logged
 
-Author: dual-auth Project
+Author: kahalewai (https://www.github.com/kahalewai)
 License: Apache 2.0
 Version: 1.0.1
 """
