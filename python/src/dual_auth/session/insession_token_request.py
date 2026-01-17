@@ -11,7 +11,7 @@ Logging:
 - Structured logging with extra={} throughout
 - No PII (email, name) logged
 
-Author: dual-auth Project
+Author: kahalewai (https://www.github.com/kahalewai)
 License: Apache 2.0
 Version: 1.0.1
 """
