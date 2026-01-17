@@ -28,7 +28,7 @@ Security Features:
 - Structured error messages with examples
 - Secrets cached in memory only (never written to disk)
 
-Author: dual-auth Project
+Author: kahalewai (https://www.github.com/kahalewai)
 License: Apache 2.0
 Version: 1.0.1
 """
