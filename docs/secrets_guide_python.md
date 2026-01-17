@@ -1,4 +1,9 @@
+<div align="center">
+
 # Dual Auth Secrets Management Guide
+Recommended for Production Implementations
+
+</div>
 
 ## Overview
 
@@ -12,7 +17,7 @@ dual-auth v1.0.1 introduces pluggable secrets management backends, allowing you 
 | **azure** | Azure production deployments | `azure-identity`, `azure-keyvault-secrets` |
 | **vault** | Multi-cloud, on-premises, enterprise | `hvac` |
 
----
+<br>
 
 ## How Users Choose Their Approach
 
@@ -62,7 +67,7 @@ config = get_config(secrets_backend='vault')
 
 **Note:** The `secrets_backend` parameter overrides the `DUAL_AUTH_SECRETS_BACKEND` environment variable.
 
----
+<br>
 
 ## Backend Configuration Details
 
@@ -89,7 +94,7 @@ export AGENT_CLIENT_SECRET=your-secret-here
 export KEYCLOAK_TOKEN_URL=https://keycloak.example.com/realms/prod/protocol/openid-connect/token
 ```
 
----
+<br>
 
 ### 2. AWS Secrets Manager Backend
 
@@ -143,7 +148,7 @@ from dual_auth import get_config
 config = get_config()  # Automatically uses AWS
 ```
 
----
+<br>
 
 ### 3. GCP Secret Manager Backend
 
@@ -187,7 +192,7 @@ export DUAL_AUTH_GCP_PROJECT=my-project-id
 export DUAL_AUTH_VENDOR=keycloak
 ```
 
----
+<br>
 
 ### 4. Azure Key Vault Backend
 
@@ -236,7 +241,7 @@ export DUAL_AUTH_AZURE_VAULT_URL=https://my-dual-auth-vault.vault.azure.net/
 export DUAL_AUTH_VENDOR=keycloak
 ```
 
----
+<br>
 
 ### 5. HashiCorp Vault Backend
 
@@ -292,7 +297,7 @@ export VAULT_TOKEN=hvs.your-token-here
 export DUAL_AUTH_VENDOR=keycloak
 ```
 
----
+<br>
 
 ## Complete Configuration Reference
 
@@ -335,7 +340,7 @@ These are the secrets that must be stored in your chosen backend:
 - `APP_ID` - Application identifier
 - `API_AUDIENCE` - API audience for act assertions
 
----
+<br>
 
 ## Migration Guide
 
@@ -372,7 +377,7 @@ These are the secrets that must be stored in your chosen backend:
 
 4. **No code changes required** - `get_config()` automatically uses the new backend
 
----
+<br>
 
 ## Error Handling
 
@@ -389,7 +394,7 @@ except ConfigurationError as e:
     # Handle invalid vendor, invalid backend, etc.
 ```
 
----
+<br>
 
 ## Security Best Practices
 
