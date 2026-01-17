@@ -17,7 +17,7 @@ Logging:
 
 Vendor Support: All vendors with automatic header adaptation
 
-Author: https://www.github.com/kahalewai)
+Author: kahalewai (https://www.github.com/kahalewai)
 License: Apache 2.0
 Version: 1.0.1
 """
