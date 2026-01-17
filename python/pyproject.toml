@@ -9,7 +9,7 @@ description = "Dual-Subject Access Control for AI Agents - A security solution i
 readme = "README.md"
 license = "Apache-2.0"
 authors = [
-    {name = "dual-auth Project"}
+    {name = "kahalewai"}
 ]
 keywords = [
     "security",
