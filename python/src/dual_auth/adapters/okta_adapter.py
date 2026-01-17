@@ -13,7 +13,7 @@ Security Features:
 
 Compatible with: Okta Workforce Identity with Custom Authorization Server
 
-Author: dual-auth Project
+Author: kahalewai (https://www.github.com/kahalewai)
 License: Apache 2.0
 Version: 1.0.1
 """
