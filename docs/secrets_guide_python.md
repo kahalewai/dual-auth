@@ -5,9 +5,12 @@ Recommended for Production Implementations
 
 </div>
 
+<br>
+<br>
+
 ## Overview
 
-dual-auth v1.0.1 introduces pluggable secrets management backends, allowing you to choose the most appropriate secrets storage for your environment:
+Dual Auth v1.0.1 introduces pluggable secrets management backends, allowing you to choose the most appropriate secrets storage for your environment:
 
 | Backend | Use Case | Required Package |
 |---------|----------|------------------|
