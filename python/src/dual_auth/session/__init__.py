@@ -3,7 +3,7 @@ dual-auth Session Handling
 
 Session management for in-session and out-of-session agent scenarios.
 
-Author: dual-auth Project
+Author: kahalewai (https://www.github.com/kahalewai)
 License: Apache 2.0
 Version: 1.0.1
 """
