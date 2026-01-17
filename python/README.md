@@ -1,8 +1,6 @@
 <div align="center">
 
-# dual-auth Application/Agent Implementation Guide
-
-**Python Implementation Guide for Dual-Subject Authorization**
+# Dual-Auth Implementation Guide for Python
 
 **Version 1.0.1**
 
@@ -55,10 +53,10 @@ Before starting, ensure you have:
 
 ### **IAM Configuration**
 - [ ] IAM provider configured (choose one):
-  - [ ] Keycloak (see [Keycloak IAM Configuration Guide](https://www.github.com/kahalewai/dual-auth/docs/iam_guide_keycloak.md))
-  - [ ] Auth0 (see [Auth0 IAM Configuration Guide](https://www.github.com/kahalewai/dual-auth/docs/iam_guide_auth0.md))
-  - [ ] Okta (see [Okta IAM Configuration Guide](https://www.github.com/kahalewai/dual-auth/docs/iam_guide_okta.md))
-  - [ ] EntraID (see [EntraID IAM Configuration Guide](https://www.github.com/kahalewai/dual-auth/docs/iam_guide_entraid.md))
+  - Keycloak (see [Keycloak IAM Configuration Guide](https://www.github.com/kahalewai/dual-auth/docs/iam_guide_keycloak.md))
+  - Auth0 (see [Auth0 IAM Configuration Guide](https://www.github.com/kahalewai/dual-auth/docs/iam_guide_auth0.md))
+  - Okta (see [Okta IAM Configuration Guide](https://www.github.com/kahalewai/dual-auth/docs/iam_guide_okta.md))
+  - EntraID (see [EntraID IAM Configuration Guide](https://www.github.com/kahalewai/dual-auth/docs/iam_guide_entraid.md))
 
 ### **Technical Requirements**
 - [ ] Python 3.9 or higher installed
@@ -82,7 +80,7 @@ Before starting, ensure you have:
 
 ### **In-Session Flow**
 
-\`\`\`
+```
 ┌──────────────────┐
 │  Web Application │
 │                  │
@@ -130,11 +128,11 @@ Before starting, ensure you have:
 │  6. Calls API    │
 │     with token   │
 └──────────────────┘
-\`\`\`
+```
 
 ### **Out-of-Session Flow**
 
-\`\`\`
+```
 ┌──────────────────┐
 │  Web Application │
 │                  │
@@ -176,7 +174,7 @@ Before starting, ensure you have:
 │  7. Calls API    │
 │     with token   │
 └──────────────────┘
-\`\`\`
+```
 
 <br>
 
@@ -186,61 +184,61 @@ Before starting, ensure you have:
 
 The dual-auth package has the following structure:
 
-\`\`\`
+```
 dual_auth/
-├── __init__.py              # Main package exports
-├── config.py                # Configuration with secrets management
+├── __init__.py                          # Main package exports
+├── config.py                            # Configuration with secrets management
 ├── adapters/
 │   ├── __init__.py
-│   ├── base_adapter.py      # Base adapter class
-│   ├── keycloak_adapter.py  # Keycloak adapter
-│   ├── auth0_adapter.py     # Auth0 adapter
-│   ├── okta_adapter.py      # Okta adapter
-│   └── entraid_adapter.py   # EntraID adapter
+│   ├── base_adapter.py                  # Base adapter class
+│   ├── keycloak_adapter.py              # Keycloak adapter
+│   ├── auth0_adapter.py                 # Auth0 adapter
+│   ├── okta_adapter.py                  # Okta adapter
+│   └── entraid_adapter.py               # EntraID adapter
 ├── session/
 │   ├── __init__.py
-│   ├── hybrid_sender.py     # Human identity extraction
-│   ├── insession_token_request.py
-│   └── outofsession_token_request.py
+│   ├── hybrid_sender.py                 # Human identity extraction
+│   ├── insession_token_request.py       # Dual-Subject Token Requests within Application Session (Local Agents)
+│   └── outofsession_token_request.py    # Dual-Subject Token Requests outside Application Session (Remote Agents)
 └── api/
     ├── __init__.py
-    ├── insession_api_call.py
-    └── outofsession_api_call.py
-\`\`\`
+    ├── insession_api_call.py            # Dual-Subject Token API Requests within Application Session (Local Agents)
+    └── outofsession_api_call.py         # Dual-Subject Token API Requests outside Application Session (Remote Agents)
+```
 
 ### 1.2 Install the Package
 
 **Option A: Install from PyPI (recommended)**
 
-\`\`\`bash
+```
 pip install dual-auth
-\`\`\`
+```
 
 **Option B: Install from source**
 
-\`\`\`bash
+```
 git clone https://github.com/kahalewai/dual-auth/python/src/dual_auth.git
 cd dual_auth
 pip install .
-\`\`\`
+```
 
 **Option C: Install as editable package**
 
-\`\`\`bash
+```
 git clone https://github.com/kahalewai/dual-auth/python/src/dual_auth.git
 cd dual-auth
 pip install -e .
-\`\`\`
+```
 
 ### 1.3 Install Required Dependencies
 
-\`\`\`bash
+```
 pip install pyjwt[crypto]>=2.8.0 requests>=2.31.0 cryptography>=41.0.0
-\`\`\`
+```
 
 **For cloud secrets management (optional, choose as needed):**
 
-\`\`\`bash
+```
 # AWS Secrets Manager
 pip install boto3
 
@@ -252,11 +250,11 @@ pip install azure-identity azure-keyvault-secrets
 
 # HashiCorp Vault
 pip install hvac
-\`\`\`
+```
 
 ### 1.4 Verify Installation
 
-\`\`\`bash
+```
 python3 -c "
 from dual_auth import (
     __version__,
@@ -276,12 +274,12 @@ from dual_auth import (
 )
 print(f'✅ dual-auth v{__version__} installed successfully')
 "
-\`\`\`
+```
 
 **Expected output:**
-\`\`\`
+```
 ✅ dual-auth v1.0.1 installed successfully
-\`\`\`
+```
 
 <br>
 
@@ -291,15 +289,15 @@ print(f'✅ dual-auth v{__version__} installed successfully')
 
 Create a \`.env\` file in your project root:
 
-\`\`\`bash
+```
 touch .env
-\`\`\`
+```
 
 **⚠️ Security:** Add \`.env\` to \`.gitignore\` to prevent committing secrets:
 
-\`\`\`bash
+```
 echo ".env" >> .gitignore
-\`\`\`
+```
 
 ### 2.2 Configure for Your IAM Vendor
 
@@ -307,7 +305,7 @@ echo ".env" >> .gitignore
 
 #### **Option A: Keycloak**
 
-\`\`\`bash
+```
 # Vendor Selection
 DUAL_AUTH_VENDOR=keycloak
 
@@ -318,11 +316,11 @@ AGENT_CLIENT_SECRET=your-client-secret-from-keycloak
 
 # API Configuration
 API_URL=https://api.example.com/finance/report
-\`\`\`
+```
 
 #### **Option B: Auth0**
 
-\`\`\`bash
+```
 # Vendor Selection
 DUAL_AUTH_VENDOR=auth0
 
@@ -334,11 +332,11 @@ API_AUDIENCE=https://api.example.com
 
 # API Configuration
 API_URL=https://api.example.com/finance/report
-\`\`\`
+```
 
 #### **Option C: Okta**
 
-\`\`\`bash
+```
 # Vendor Selection
 DUAL_AUTH_VENDOR=okta
 
@@ -350,11 +348,11 @@ API_AUDIENCE=https://api.example.com
 
 # API Configuration
 API_URL=https://api.example.com/finance/report
-\`\`\`
+```
 
 #### **Option D: EntraID**
 
-\`\`\`bash
+```
 # Vendor Selection
 DUAL_AUTH_VENDOR=entraid
 
@@ -371,11 +369,11 @@ APP_ID=https://your-app-identifier
 
 # API Configuration
 API_URL=https://api.example.com/finance/report
-\`\`\`
+```
 
 ### 2.3 Load Configuration in Your Application
 
-\`\`\`python
+```
 # your_app.py
 from dual_auth import get_config, ConfigurationError, KeycloakAdapter
 import sys
@@ -397,31 +395,31 @@ def main():
 
 if __name__ == '__main__':
     main()
-\`\`\`
+```
 
 ### 2.4 Configuration Patterns
 
 #### **Pattern 1: Auto-detect vendor (Recommended)**
 
-\`\`\`python
+```
 from dual_auth import get_config
 
 # Auto-detects vendor from DUAL_AUTH_VENDOR env var
 config = get_config()
-\`\`\`
+```
 
 #### **Pattern 2: Explicit vendor**
 
-\`\`\`python
+```
 from dual_auth import get_config
 
 # Override vendor (ignores DUAL_AUTH_VENDOR env var)
 config = get_config(vendor='auth0')
-\`\`\`
+```
 
 #### **Pattern 3: With error handling**
 
-\`\`\`python
+```
 from dual_auth import get_config, ConfigurationError, SecretsBackendError
 import logging
 import sys
@@ -436,42 +434,42 @@ except SecretsBackendError as e:
 except ConfigurationError as e:
     logger.error(f"Configuration error: {e}")
     sys.exit(1)
-\`\`\`
+```
 
 ### 2.5 Configuration Dictionary by Vendor
 
 **Keycloak:**
-\`\`\`python
+```
 {
     'token_url': 'https://keycloak.example.com/realms/prod/protocol/openid-connect/token',
     'client_id': 'finance-agent',
     'client_secret': 'my-secret-123',
     'audience': None  # Auto-derived from token_url
 }
-\`\`\`
+```
 
 **Auth0:**
-\`\`\`python
+```
 {
     'token_url': 'https://tenant.auth0.com/oauth/token',
     'client_id': 'finance-agent',
     'client_secret': 'my-secret-123',
     'audience': 'https://api.example.com'
 }
-\`\`\`
+```
 
 **Okta:**
-\`\`\`python
+```
 {
     'token_url': 'https://dev-123.okta.com/oauth2/aus123/v1/token',
     'client_id': 'finance-agent',
     'client_secret': 'my-secret-123',
     'audience': 'https://api.example.com'
 }
-\`\`\`
+```
 
 **EntraID:**
-\`\`\`python
+```
 {
     'token_url': 'https://login.microsoftonline.com/tenant-id/oauth2/v2.0/token',
     'client_id': 'finance-agent',
@@ -481,7 +479,7 @@ except ConfigurationError as e:
     'app_id': 'https://app.example.com',
     'act_audience': 'https://api.example.com'
 }
-\`\`\`
+```
 
 <br>
 
@@ -502,98 +500,98 @@ dual-auth v1.0.1 supports five secrets backends:
 ### 3.1 AWS Secrets Manager
 
 **Install:**
-\`\`\`bash
+```
 pip install boto3
-\`\`\`
+```
 
 **Configure:**
-\`\`\`bash
+```
 export DUAL_AUTH_SECRETS_BACKEND=aws
 export DUAL_AUTH_AWS_REGION=us-west-2
 export DUAL_AUTH_AWS_SECRET_PREFIX=dual-auth/
-\`\`\`
+```
 
 **Create secrets in AWS:**
-\`\`\`bash
+```
 aws secretsmanager create-secret --name dual-auth/AGENT_CLIENT_ID --secret-string "finance-agent"
 aws secretsmanager create-secret --name dual-auth/AGENT_CLIENT_SECRET --secret-string "your-secret"
 aws secretsmanager create-secret --name dual-auth/KEYCLOAK_TOKEN_URL --secret-string "https://..."
-\`\`\`
+```
 
 **Use in application:**
-\`\`\`python
+```
 from dual_auth import get_config
 
 # Automatically uses AWS Secrets Manager
 config = get_config()
-\`\`\`
+```
 
 ### 3.2 GCP Secret Manager
 
 **Install:**
-\`\`\`bash
+```
 pip install google-cloud-secret-manager
-\`\`\`
+```
 
 **Configure:**
-\`\`\`bash
+```
 export DUAL_AUTH_SECRETS_BACKEND=gcp
 export DUAL_AUTH_GCP_PROJECT=your-project-id
 export DUAL_AUTH_GCP_SECRET_PREFIX=dual-auth-
-\`\`\`
+```
 
 **Create secrets in GCP:**
-\`\`\`bash
+```
 echo -n "finance-agent" | gcloud secrets create dual-auth-agent-client-id --data-file=-
 echo -n "your-secret" | gcloud secrets create dual-auth-agent-client-secret --data-file=-
 echo -n "https://..." | gcloud secrets create dual-auth-keycloak-token-url --data-file=-
-\`\`\`
+```
 
 ### 3.3 Azure Key Vault
 
 **Install:**
-\`\`\`bash
+```
 pip install azure-identity azure-keyvault-secrets
-\`\`\`
+```
 
 **Configure:**
-\`\`\`bash
+```
 export DUAL_AUTH_SECRETS_BACKEND=azure
 export DUAL_AUTH_AZURE_VAULT_URL=https://your-vault.vault.azure.net/
 export DUAL_AUTH_AZURE_SECRET_PREFIX=dual-auth-
-\`\`\`
+```
 
 **Create secrets in Azure:**
-\`\`\`bash
+```
 az keyvault secret set --vault-name your-vault --name dual-auth-agent-client-id --value "finance-agent"
 az keyvault secret set --vault-name your-vault --name dual-auth-agent-client-secret --value "your-secret"
-\`\`\`
+```
 
 ### 3.4 HashiCorp Vault
 
 **Install:**
-\`\`\`bash
+```
 pip install hvac
-\`\`\`
+```
 
 **Configure:**
-\`\`\`bash
+```
 export DUAL_AUTH_SECRETS_BACKEND=vault
 export VAULT_ADDR=https://vault.example.com:8200
 export VAULT_TOKEN=hvs.your-token
 export DUAL_AUTH_VAULT_MOUNT=secret
 export DUAL_AUTH_VAULT_PATH_PREFIX=dual-auth/
-\`\`\`
+```
 
 **Create secrets in Vault:**
-\`\`\`bash
+```
 vault kv put secret/dual-auth/agent-client-id value="finance-agent"
 vault kv put secret/dual-auth/agent-client-secret value="your-secret"
-\`\`\`
+```
 
 ### 3.5 Explicit Backend Selection
 
-\`\`\`python
+```
 from dual_auth import get_config
 
 # Override backend via parameter
@@ -601,7 +599,7 @@ config = get_config(secrets_backend='aws')
 
 # Or combine with vendor override
 config = get_config(vendor='okta', secrets_backend='vault')
-\`\`\`
+```
 
 <br>
 
@@ -618,7 +616,7 @@ The **HybridSender** extracts human identity from your application's authenticat
 
 ### 4.2 Create HybridSender Instance
 
-\`\`\`python
+```
 from dual_auth import HybridSender
 
 # For in-session scenarios (no keys needed)
@@ -628,13 +626,13 @@ sender = HybridSender()
 sender = HybridSender(
     private_key_pem='/path/to/app-private-key.pem'
 )
-\`\`\`
+```
 
 ### 4.3 Extract Act from Your Session
 
 **Example 1: From Flask Session**
 
-\`\`\`python
+```
 from flask import session
 from dual_auth import UserSession, HybridSender
 
@@ -657,11 +655,11 @@ def dashboard():
     
     # act is now ready to pass to agent
     # {'sub': 'iam-user-id', 'email': '...', 'name': '...'}
-\`\`\`
+```
 
 **Example 2: From Django Session**
 
-\`\`\`python
+```
 from django.contrib.auth.decorators import login_required
 from dual_auth import UserSession, HybridSender
 
@@ -677,13 +675,13 @@ def dashboard(request):
     # Extract act claim
     sender = HybridSender()
     act = sender.extract_act_from_session(user_session)
-\`\`\`
+```
 
 ### 4.4 Best Practice: Extract from OIDC Token
 
 The recommended approach is to extract user information directly from the OIDC ID token:
 
-\`\`\`python
+```
 from flask import session
 from dual_auth import UserSession, HybridSender
 import jwt
@@ -717,20 +715,20 @@ def dashboard():
     act = sender.extract_act_from_session(user_session)
     
     # act.sub will now contain the IAM user ID (pseudonymous)
-\`\`\`
+```
 
 ### 4.5 Act Claim Format
 
 The \`act\` should be a dictionary containing the human identity:
 
-\`\`\`python
+```
 {
     'sub': 'iam-user-id',              # Required: IAM user identifier
     'email': 'alice@corp.example.com', # Recommended: For display
     'name': 'Alice Smith',             # Recommended: For display
     'oid': 'entraid-object-id'         # Required for EntraID: Object ID
 }
-\`\`\`
+```
 
 **⚠️ Security Note:** The \`act.sub\` field should contain the user's **IAM user identifier**, not their email address:
 
@@ -763,7 +761,7 @@ The \`act\` should be a dictionary containing the human identity:
 
 ### 5.2 Configure IAM Adapter
 
-\`\`\`python
+```
 from dual_auth import get_config, KeycloakAdapter, Auth0Adapter, OktaAdapter, EntraIDAdapter
 
 # Load configuration
@@ -780,11 +778,11 @@ elif vendor == 'okta':
     adapter = OktaAdapter(config)
 elif vendor == 'entraid':
     adapter = EntraIDAdapter(config)
-\`\`\`
+```
 
 **Simpler pattern using factory:**
 
-\`\`\`python
+```
 from dual_auth import (
     get_config, get_vendor,
     KeycloakAdapter, Auth0Adapter, OktaAdapter, EntraIDAdapter
@@ -807,11 +805,11 @@ def get_adapter():
         raise ValueError(f"Unknown vendor: {vendor}")
     
     return adapter_class(config)
-\`\`\`
+```
 
 ### 5.3 Create In-Session Token Request
 
-\`\`\`python
+```
 from dual_auth import InSessionTokenRequest, HybridSender, UserSession
 
 # 1. Create adapter
@@ -844,11 +842,11 @@ access_token = token_response.access_token
 # For EntraID (hybrid approach)
 if token_response.act_assertion:
     act_assertion = token_response.act_assertion
-\`\`\`
+```
 
 ### 5.4 Complete In-Session Example
 
-\`\`\`python
+```
 from flask import Flask, session, redirect, jsonify
 from dual_auth import (
     get_config, get_vendor,
@@ -911,7 +909,7 @@ def agent_task():
         
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-\`\`\`
+```
 
 <br>
 
@@ -921,7 +919,7 @@ def agent_task():
 
 Create \`test_in_session.py\`:
 
-\`\`\`python
+```
 import os
 import logging
 from dotenv import load_dotenv
@@ -1014,17 +1012,17 @@ def test_in_session_flow():
 
 if __name__ == '__main__':
     test_in_session_flow()
-\`\`\`
+```
 
 ### 6.2 Run Test
 
-\`\`\`bash
+```
 python test_in_session.py
-\`\`\`
+```
 
 ### 6.3 Expected Output
 
-\`\`\`
+```
 ============================================================
 dual-auth In-Session Flow Test
 ============================================================
@@ -1050,7 +1048,7 @@ dual-auth In-Session Flow Test
 ============================================================
 ✓ IN-SESSION FLOW TEST PASSED
 ============================================================
-\`\`\`
+```
 
 <br>
 
@@ -1070,7 +1068,7 @@ dual-auth In-Session Flow Test
 
 **Using OpenSSL:**
 
-\`\`\`bash
+```
 # Generate private key
 openssl genrsa -out app-private-key.pem 2048
 
@@ -1080,11 +1078,11 @@ openssl rsa -in app-private-key.pem -pubout -out app-public-key.pem
 # Display keys
 cat app-private-key.pem
 cat app-public-key.pem
-\`\`\`
+```
 
 **Using Python:**
 
-\`\`\`python
+```
 from cryptography.hazmat.primitives.asymmetric import rsa
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.backends import default_backend
@@ -1118,13 +1116,13 @@ with open('app-public-key.pem', 'wb') as f:
     f.write(public_pem)
 
 print("✓ Keys generated: app-private-key.pem, app-public-key.pem")
-\`\`\`
+```
 
 ### 7.3 Application: Create and Send Act JWT
 
 **In your web application:**
 
-\`\`\`python
+```
 from dual_auth import HybridSender, UserSession
 import requests
 import os
@@ -1166,13 +1164,13 @@ if response.status_code == 200:
     print(f"Agent task completed: {result}")
 else:
     print(f"Agent task failed: {response.status_code}")
-\`\`\`
+```
 
 ### 7.4 Agent: Receive and Verify Act JWT
 
 **In your agent service:**
 
-\`\`\`python
+```
 from flask import Flask, request, jsonify
 from dual_auth import (
     get_config, get_vendor,
@@ -1244,7 +1242,7 @@ def invoke_agent():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, ssl_context='adhoc')
-\`\`\`
+```
 
 <br>
 
@@ -1254,7 +1252,7 @@ if __name__ == '__main__':
 
 Create \`test_out_of_session.py\`:
 
-\`\`\`python
+```
 import os
 import logging
 from dotenv import load_dotenv
@@ -1364,13 +1362,13 @@ def test_out_of_session_flow():
 
 if __name__ == '__main__':
     test_out_of_session_flow()
-\`\`\`
+```
 
 ### 8.2 Run Test
 
-\`\`\`bash
+```
 python test_out_of_session.py
-\`\`\`
+```
 
 <br>
 
@@ -1389,16 +1387,16 @@ The **InSessionAPICall** and **OutOfSessionAPICall** handle authenticated API ca
 
 ### 9.2 Create API Client
 
-\`\`\`python
+```
 from dual_auth import InSessionAPICall
 
 # Create client
 client = InSessionAPICall(timeout=30)
-\`\`\`
+```
 
 ### 9.3 Make GET Request
 
-\`\`\`python
+```
 # After getting token from token request
 token_response = token_request.request_token(...)
 
@@ -1418,11 +1416,11 @@ elif response.status_code == 403:
     print("Access denied - check authorization")
 else:
     print(f"API error: {response.status_code}")
-\`\`\`
+```
 
 ### 9.4 Make POST Request
 
-\`\`\`python
+```
 # Make authenticated POST request
 response = client.call_api(
     method='POST',
@@ -1438,11 +1436,11 @@ if response.status_code == 201:
     print("Transaction created")
 else:
     print(f"Failed: {response.status_code}")
-\`\`\`
+```
 
 ### 9.5 Complete API Call Example
 
-\`\`\`python
+```
 from dual_auth import (
     get_config, get_vendor,
     KeycloakAdapter, Auth0Adapter, OktaAdapter, EntraIDAdapter,
@@ -1514,13 +1512,13 @@ def perform_agent_task():
             return {'success': True, 'summary_id': summary_response.json()['id']}
     
     return {'success': False, 'error': 'API call failed'}
-\`\`\`
+```
 
 ### 9.6 EntraID-Specific Header Handling
 
 **The API client automatically handles EntraID's two-header format:**
 
-\`\`\`python
+```
 # For Keycloak/Auth0/Okta
 # Headers sent:
 # Authorization: Bearer <token>
@@ -1537,7 +1535,7 @@ response = client.call_api(
     api_url=api_url,
     token_response=token_response  # Contains both components for EntraID
 )
-\`\`\`
+```
 
 <br>
 
@@ -1548,7 +1546,7 @@ response = client.call_api(
 dual-auth uses **IAM user identifiers** (not PII) for logging, ensuring privacy compliance while maintaining audit trails.
 
 **✅ DO: Log IAM identifiers**
-\`\`\`python
+```
 import logging
 
 logger = logging.getLogger(__name__)
@@ -1566,14 +1564,14 @@ logger.info(
         "resource": "/api/finance/reports"
     }
 )
-\`\`\`
+```
 
 **❌ DON'T: Log PII**
-\`\`\`python
+```
 # BAD - Logs PII
 logger.info(f"User {act['email']} accessed reports")  # ❌ Email is PII
 logger.info(f"Name: {act['name']}")                   # ❌ Name is PII
-\`\`\`
+```
 
 ### 10.2 Why Log IAM Identifiers?
 
@@ -1609,7 +1607,7 @@ logger.info(f"Name: {act['name']}")                   # ❌ Name is PII
 
 **✅ DO** use dual-auth's built-in secrets management:
 
-\`\`\`python
+```
 from dual_auth import get_config
 
 # AWS Secrets Manager
@@ -1623,7 +1621,7 @@ config = get_config(secrets_backend='azure')
 
 # HashiCorp Vault
 config = get_config(secrets_backend='vault')
-\`\`\`
+```
 
 See [Step 3: Configure Secrets Management](#step-3-configure-secrets-management-production) for detailed setup.
 
@@ -1631,7 +1629,7 @@ See [Step 3: Configure Secrets Management](#step-3-configure-secrets-management-
 
 **Production logging with structured JSON:**
 
-\`\`\`python
+```
 import logging
 import json
 from datetime import datetime
@@ -1664,13 +1662,13 @@ handler.setFormatter(JSONFormatter())
 logger = logging.getLogger()
 logger.addHandler(handler)
 logger.setLevel(logging.INFO)
-\`\`\`
+```
 
 ### 11.3 Docker Deployment
 
 **Dockerfile:**
 
-\`\`\`dockerfile
+```
 FROM python:3.11-slim
 
 WORKDIR /app
@@ -1687,23 +1685,23 @@ COPY your_app.py .
 
 # Run application
 CMD ["python", "-u", "your_app.py"]
-\`\`\`
+```
 
 **Build and run:**
 
-\`\`\`bash
+```
 docker build -t dual-auth-agent .
 docker run -e DUAL_AUTH_VENDOR=keycloak \
            -e DUAL_AUTH_SECRETS_BACKEND=aws \
            -e DUAL_AUTH_AWS_REGION=us-west-2 \
            dual-auth-agent
-\`\`\`
+```
 
 ### 11.4 Kubernetes Deployment
 
 **deployment.yaml:**
 
-\`\`\`yaml
+```
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -1733,13 +1731,13 @@ spec:
           value: "https://vault.example.com:8200"
         ports:
         - containerPort: 5000
-\`\`\`
+```
 
 ### 11.5 Health Checks
 
 **Add health check endpoint:**
 
-\`\`\`python
+```
 from flask import Flask, jsonify
 from dual_auth import get_config, ConfigurationError
 import os
@@ -1769,7 +1767,7 @@ def ready():
     return jsonify({
         'ready': ready
     }), 200 if ready else 503
-\`\`\`
+```
 
 <br>
 
@@ -1779,9 +1777,9 @@ def ready():
 
 #### **Issue 1: Import Errors**
 
-\`\`\`
+```
 ImportError: No module named 'dual_auth'
-\`\`\`
+```
 
 **Solution:**
 - Verify dual_auth directory is in your project
@@ -1790,9 +1788,9 @@ ImportError: No module named 'dual_auth'
 
 #### **Issue 2: Configuration Error**
 
-\`\`\`
+```
 ConfigurationError: Environment variable 'AGENT_CLIENT_ID' is required
-\`\`\`
+```
 
 **Solution:**
 - Verify all required environment variables are set
@@ -1801,9 +1799,9 @@ ConfigurationError: Environment variable 'AGENT_CLIENT_ID' is required
 
 #### **Issue 3: Secrets Backend Error**
 
-\`\`\`
+```
 SecretsBackendError: AWS secret 'dual-auth/AGENT_CLIENT_SECRET' not found
-\`\`\`
+```
 
 **Solution:**
 - Verify secret exists in secrets manager
@@ -1812,9 +1810,9 @@ SecretsBackendError: AWS secret 'dual-auth/AGENT_CLIENT_SECRET' not found
 
 #### **Issue 4: JWT Signature Verification Failed**
 
-\`\`\`
+```
 ValueError: Act JWT verification failed: InvalidSignatureError
-\`\`\`
+```
 
 **Solutions:**
 - Verify \`APP_PUBLIC_KEY_PATH\` points to correct public key
@@ -1823,9 +1821,9 @@ ValueError: Act JWT verification failed: InvalidSignatureError
 
 #### **Issue 5: Token Missing Act Claim**
 
-\`\`\`
+```
 Token received but missing 'act' claim
-\`\`\`
+```
 
 **Solution by vendor:**
 
@@ -1843,9 +1841,9 @@ Token received but missing 'act' claim
 
 #### **Issue 6: EntraID Two Headers**
 
-\`\`\`
+```
 API returns 401 even with valid token
-\`\`\`
+```
 
 **Solution:**
 - Verify resource server expects \`X-Act-Assertion\` header
@@ -1854,9 +1852,9 @@ API returns 401 even with valid token
 
 #### **Issue 7: HTTPS Required Error**
 
-\`\`\`
+```
 ValueError: API URL must use HTTPS
-\`\`\`
+```
 
 **Solution:**
 - Change \`http://\` to \`https://\` in all URLs
@@ -1868,7 +1866,7 @@ ValueError: API URL must use HTTPS
 
 ### **Example 1: Flask Application with In-Session Agent**
 
-\`\`\`python
+```
 from flask import Flask, session, redirect, url_for, jsonify
 from dual_auth import (
     get_config, get_vendor, ConfigurationError, SecretsBackendError,
@@ -1972,11 +1970,11 @@ def analyze_finances():
 
 if __name__ == '__main__':
     app.run(debug=False, host='0.0.0.0', port=5000)
-\`\`\`
+```
 
 ### **Example 2: FastAPI Application**
 
-\`\`\`python
+```
 from fastapi import FastAPI, Depends, HTTPException, Request
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel
@@ -2065,7 +2063,7 @@ async def execute_task(client, token_response, task, parameters):
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
-\`\`\`
+```
 
 <br>
 
