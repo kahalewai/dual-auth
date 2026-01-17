@@ -4,6 +4,8 @@
 
 **Dual-Subject Authorization for Humans and AI Agents**
 
+![dual-auth](https://github.com/user-attachments/assets/04a72a8a-d77f-400b-88f3-0c462451f63b)
+
 Version 1.0.1
 
 </div>
