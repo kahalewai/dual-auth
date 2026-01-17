@@ -137,7 +137,7 @@ response = client.call_api(
 )
 ```
 
-For complete setup instructions, see the [Python Implementation Guide](https://github.com/kahalewai/dual-auth/python/README.md).
+For complete setup instructions, see the [Python Implementation Guide](https://github.com/kahalewai/dual-auth/blob/main/python/README.md).
 
 <br>
 
@@ -189,7 +189,7 @@ config = get_config(secrets_backend='aws')
 config = get_config(secrets_backend='vault')
 ```
 
-See the [Python Implementation Guide](https://github.com/kahalewai/dual-auth/python#step-3-configure-secrets-management-production) for detailed setup.
+See the [Python Implementation Guide](https://github.com/kahalewai/dual-auth/blob/main/python/README.md) for detailed setup.
 
 <br>
 
@@ -210,7 +210,7 @@ IAM Guides and their resulting implementations are independent and do not depend
 
 The Implementation Guide provides step-by-step instructions for integrating dual-auth into your applications and agents:
 
-* **Python**: [Python Implementation Guide](https://github.com/kahalewai/dual-auth/python)
+* **Python**: [Python Implementation Guide](https://github.com/kahalewai/dual-auth/blob/main/python/README.md)
 * **TypeScript**: (Coming Soon)
 * **Java**: (Coming Soon)
 
