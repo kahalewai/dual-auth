@@ -275,7 +275,7 @@ See the [Implementation Guide](./dual_auth_implementation_guide.md#step-7-implem
 
 <br>
 
-## Out of Scope
+## Out of Scope v1.0.1
 
 dual-auth does not:
 * Provide object-level authorization
@@ -283,6 +283,8 @@ dual-auth does not:
 * Perform RFC 8693 token exchange
 * Support dynamic delegation
 * Provide automated IAM provisioning
+
+These capabilities are planned for v2.0.0
 
 <br>
 
