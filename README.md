@@ -5,8 +5,12 @@
 **Dual-Subject Authorization for Humans and AI Agents**
 
 ![dual-auth](https://github.com/user-attachments/assets/04a72a8a-d77f-400b-88f3-0c462451f63b)
+<br>
+[![AGBAC](https://img.shields.io/badge/AGBAC-v1.0.0-blue)](https://github.com/kahalewai/agbac)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-green.svg)](https://www.python.org/downloads/)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-orange.svg)](LICENSE)
+[![Version](https://img.shields.io/badge/version-1.0.1-red.svg)](https://github.com/kahalewai/dual-auth)
 
-Version 1.0.1
 
 </div>
 
