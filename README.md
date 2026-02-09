@@ -280,7 +280,7 @@ token_request = OutOfSessionTokenRequest(
 token_response = token_request.request_token_from_jwt(act_jwt, agent_id, scope)
 ```
 
-See the [Implementation Guide](./dual_auth_implementation_guide.md#step-7-implement-out-of-session-agent) for complete out-of-session setup.
+See the [Implementation Guide](https://github.com/kahalewai/dual-auth/blob/main/python/README.md#step-7-implement-out-of-session-agent) for complete out-of-session setup.
 
 <br>
 
