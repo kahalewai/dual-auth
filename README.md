@@ -1,11 +1,9 @@
 <div align="center">
 
-# AGBAC Dual-Auth Library
+<img width="369" height="418" alt="dual-auth1" src="https://github.com/user-attachments/assets/4009184b-720e-4cfe-8725-e864d58e3cde" />
 
-**Dual-Subject Authorization for Humans and AI Agents**
-
-![dual-auth](https://github.com/user-attachments/assets/04a72a8a-d77f-400b-88f3-0c462451f63b)
 <br>
+
 [![AGBAC](https://img.shields.io/badge/AGBAC-v1.0.0-blue)](https://github.com/kahalewai/agbac)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-green.svg)](https://www.python.org/downloads/)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-orange.svg)](LICENSE)
