@@ -30,7 +30,7 @@ Dual-Auth is intended to:
 
 <br>
 
-## How dual-auth Works
+## How Dual Auth Works
 
 Implementing dual-subject authorization requires that your Application/Agent becomes dual-subject aware AND your existing IAM Solution is configured to support AGBAC. The dual-auth library is used to make your Application/Agent dual-subject aware. The IAM Configuration Guides will walk you through configuring your IAM Solution. Each implementation enforces the same core requirement:
 
@@ -50,6 +50,13 @@ The concept of dual-auth focuses on system-level access control, showing that:
 * Agents can become aware of the associated human user
 * Authorization is enforced before system access
 * Audit records reflect both subjects
+
+<br>
+
+## Dual Auth Design
+
+Dual Auth is designed to conform to the AGBAC (AGent Based Access Control) Standard
+* AGBAC Standard v1.0.0 Document: https://github.com/kahalewai/agbac
 
 <br>
 
